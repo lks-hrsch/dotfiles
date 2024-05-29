@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILES=(".zshrc" ".bashrc")  # List of dotfiles to manage
+FILES=(".zshrc" ".bashrc" ".p10k.zsh")  # List of dotfiles to manage
 DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 
 
