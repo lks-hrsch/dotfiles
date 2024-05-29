@@ -1,37 +1,29 @@
 #!/bin/bash
 
 FILES=(".zshrc" ".bashrc")  # List of dotfiles to manage
+DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 
 
 # Function to create symlinks
 create_symlinks() {
   for file in "${FILES[@]}"; do
-    if [ -f "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
-      mv "$HOME/$file" "./"
-      echo "moved $file to git directory."
+    if [ ! -L "$HOME/$file" ]; then
+        ln -sf "$DOTFILES_DIR/$file" "$HOME/$file"
+        echo "created symlink for $file."
     fi
-    ln -sf "./$file" "$HOME/$file"
-    echo "created symlink for $file."
   done
 }
 
 # Function to sync dotfiles
 sync_dotfiles() {
   for file in "${FILES[@]}"; do
-    if [ -f "$HOME/$file" ]; then
-      cp "$HOME/$file" "./"
+    if [ -f "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
+      mv "$HOME/$file" "$DOTFILES_DIR/"
       echo "Copied $file to dotfiles directory."
       git add .
       git commit -m "Add $file"
     fi
   done
-}
-
-# Function to push changes to git
-push_to_git() {
-  cd "$DOTFILES_DIR" || exit
-  git add .
-  git commit -m "Update dotfiles"
 }
 
 # Check for arguments
