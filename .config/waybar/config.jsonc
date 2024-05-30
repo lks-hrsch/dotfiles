@@ -1,69 +1,54 @@
 // -*- mode: jsonc -*-
-{
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "margin": 6,
-    "height": 34, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 6, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-        "hyprland/workspaces",
-        "wlr/taskbar"
-    ],
-    "modules-center": [
-        "hyprland/window"
-    ],
-    "modules-right": [
-        "idle_inhibitor",
-        "pulseaudio",
-        "network",
-        "cpu",
-        "memory",
-        "hyprland/language",
-        "clock"
-    ],
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "all-outputs": true,
-        "format-icons": {
-            "1": "一",
-            "2": "二",
-            "3": "三",
-            "4": "四",
-            "5": "五",
-            "6": "六",
-            "7": "七",
-            "8": "八",
-            "9": "九",
-            "10": "十"
-        },
-        "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
-        }
+[
+    {
+        "layer": "top", // Waybar at top layer
+        "position": "top", // Waybar position (top|bottom|left|right)
+        "margin": 6,
+        "height": 34, // Waybar height (to be removed for auto height)
+        // "width": 1280, // Waybar width
+        "spacing": 6, // Gaps between modules (4px)
+        // Choose the order of the modules
+        "output": "DP-3",
+        "reload_style_on_change": true,
+        "modules-left": [
+            "hyprland/workspaces",
+            "wlr/taskbar"
+        ],
+        "modules-center": [
+            "hyprland/window"
+        ],
+        "modules-right": [
+            "idle_inhibitor",
+            "pulseaudio",
+            "network",
+            "cpu",
+            "memory",
+            "hyprland/language",
+            "clock"
+        ],
+        "include": [
+            "~/.config/waybar/modules.jsonc"
+        ]
     },
-    "idle_inhibitor": {
-        "on-click-right": "hyprlock",
-        "format": "{icon} ",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "pulseaudio": {
-        "on-click-right": "pavucontrol"
-    },
-    "clock": {
-        "format": "{:%A, %d %B %Y | %R}"
+    {
+        "layer": "top", // Waybar at top layer
+        "position": "top", // Waybar position (top|bottom|left|right)
+        "margin": 6,
+        "height": 34, // Waybar height (to be removed for auto height)
+        // "width": 1280, // Waybar width
+        "spacing": 6, // Gaps between modules (4px)
+        // Choose the order of the modules
+        "output": "!DP-3",
+        "reload_style_on_change": true,
+        "modules-left": [
+            "hyprland/workspaces",
+            "wlr/taskbar"
+        ],
+        "modules-right": [
+            "clock"
+        ],
+        "include": [
+            "~/.config/waybar/modules.jsonc"
+        ]
     }
-}
+]
