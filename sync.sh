@@ -1,6 +1,7 @@
 #!/bin/bash
+set -x
 
-FILES=(".zshrc" ".bashrc" ".p10k.zsh")  # List of dotfiles to manage
+FILES=(".zshrc" ".bashrc" ".p10k.zsh" ".config/alacritty" ".config/hypr" ".config/waybar")  # List of dotfiles to manage
 DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 
 
@@ -18,9 +19,17 @@ create_symlinks() {
 sync_dotfiles() {
   for file in "${FILES[@]}"; do
     if [ -f "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
-      mv "$HOME/$file" "$DOTFILES_DIR/"
+      mv "$HOME/$file" "$DOTFILES_DIR/$file"
       echo "Copied $file to dotfiles directory."
-      git add .
+      git add "$DOTFILES_DIR/$file"
+      git commit -m "Add $file"
+    fi
+    if [ -d "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
+      mkdir -p $DOTFILES_DIR/$file
+      mv "$HOME/$file/*" "$DOTFILES_DIR/$file"
+      rmdir "$HOME/$file"
+      echo "Copied $file to dotfiles directory."
+      git add "$DOTFILES_DIR/$file/*"
       git commit -m "Add $file"
     fi
   done
@@ -29,7 +38,7 @@ sync_dotfiles() {
 # Check for arguments
 if [ "$1" == "sync" ]; then
   sync_dotfiles
-  create_symlinks
+  # create_symlinks
 elif [ "$1" == "install" ]; then
   create_symlinks
 else
