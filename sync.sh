@@ -8,28 +8,32 @@ DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 # Function to create symlinks
 create_symlinks() {
   for file in "${FILES[@]}"; do
-    if [ ! -L "$HOME/$file" ]; then
-        ln -sf "$DOTFILES_DIR/$file" "$HOME/$file"
+    source="$HOME/$file"
+    target="$DOTFILES_DIR/$file"
+    if [ ! -L "$source" ]; then
+        ln -sf "$target" "$source"
         echo "created symlink for $file."
     fi
   done
 }
 
-# Function to sync dotfiles
-sync_dotfiles() {
+# Function to sync dotfiles to version control system
+sync_dotfiles_to_vcs() {
   for file in "${FILES[@]}"; do
-    if [ -f "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
-      mv "$HOME/$file" "$DOTFILES_DIR/$file"
+    source="$HOME/$file"
+    target="$DOTFILES_DIR/$file"
+    if [ -f "$source" ] && [ ! -L "$source" ]; then
+      mv "v" "$target"
       echo "Copied $file to dotfiles directory."
-      git add "$DOTFILES_DIR/$file"
+      git add "$target"
       git commit -m "Add $file"
     fi
-    if [ -d "$HOME/$file" ] && [ ! -L "$HOME/$file" ]; then
-      mkdir -p $DOTFILES_DIR/$file
-      mv "$HOME/$file/*" "$DOTFILES_DIR/$file"
-      rmdir "$HOME/$file"
+    if [ -d "$source" ] && [ ! -L "$source" ]; then
+      mkdir -p $target
+      mv "$source"/* "$target"
+      rmdir "$source"
       echo "Copied $file to dotfiles directory."
-      git add "$DOTFILES_DIR/$file/*"
+      git add "$target/*"
       git commit -m "Add $file"
     fi
   done
@@ -37,8 +41,8 @@ sync_dotfiles() {
 
 # Check for arguments
 if [ "$1" == "sync" ]; then
-  sync_dotfiles
-  # create_symlinks
+  sync_dotfiles_to_vcs
+  create_symlinks
 elif [ "$1" == "install" ]; then
   create_symlinks
 else
