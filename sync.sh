@@ -1,9 +1,20 @@
 #!/bin/bash
 set -x
 
-FILES=(".zshrc" ".bashrc" ".p10k.zsh" ".config/alacritty" ".config/hypr" ".config/waybar")  # List of dotfiles to manage
+FILES=(".zshrc" ".p10k.zsh" ".config/alacritty") # List of dotfiles to manage
+LINUX_FILES=(".bashrc" ".config/hypr" ".config/waybar")
+MACOS_FILES=()
 DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 
+# Determine the OS
+OS="$(uname)"
+
+# Add Mac-specific files if on macOS
+if [ "$OS" == "Darwin" ]; then
+  FILES+=("${MACOS_FILES[@]}")
+else
+  FILES+=("${LINUX_FILES[@]}")
+fi
 
 # Function to create symlinks
 create_symlinks() {
