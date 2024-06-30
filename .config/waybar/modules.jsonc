@@ -28,6 +28,9 @@
             "10": []
         }
     },
+    "tray": {
+        "spacing": 7
+    },
     "idle_inhibitor": {
         "on-click-right": "hyprlock",
         "format": "{icon} ",
@@ -38,6 +41,29 @@
     },
     "pulseaudio": {
         "on-click-right": "pavucontrol"
+    },
+    "network": {
+        "interval": 5,
+        "format-wifi": "  {essid} ({signalStrength}%)",
+        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "⚠  Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}% ({load})",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+    "memory": {
+        "interval": 5,
+        "format": "  {}%",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
     },
     "clock": {
         "format": "{:%A, %d %B %Y | %R}"

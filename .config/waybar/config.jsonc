@@ -14,10 +14,8 @@
             "hyprland/workspaces",
             "wlr/taskbar"
         ],
-        "modules-center": [
-            "hyprland/window"
-        ],
         "modules-right": [
+            "tray",
             "idle_inhibitor",
             "pulseaudio",
             "network",
@@ -45,6 +43,7 @@
             "wlr/taskbar"
         ],
         "modules-right": [
+            "tray",
             "clock"
         ],
         "include": [
