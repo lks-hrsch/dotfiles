@@ -11,6 +11,7 @@
         "output": "DP-1",
         "reload_style_on_change": true,
         "modules-left": [
+            "custom/arch-menu",
             "hyprland/workspaces",
             "wlr/taskbar"
         ],
@@ -40,6 +41,7 @@
         "output": "!DP-1",
         "reload_style_on_change": true,
         "modules-left": [
+            "custom/arch-menu",
             "hyprland/workspaces",
             "wlr/taskbar"
         ],

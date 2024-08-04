@@ -2,7 +2,7 @@
 set -x
 
 FILES=(".zshrc" ".p10k.zsh" ".config/alacritty" ".config/wallpaper") # List of dotfiles to manage
-LINUX_FILES=(".bashrc" ".config/hypr" ".config/waybar")
+LINUX_FILES=(".bashrc" ".config/hypr" ".config/waybar" ".config/rofi")
 MACOS_FILES=()
 DOTFILES_DIR="$(pwd)"  # Assuming the script is run from the dotfiles directory
 

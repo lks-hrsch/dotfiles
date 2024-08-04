@@ -1,4 +1,9 @@
 {
+    "custom/arch-menu": {
+        "format": "<span font='20'>󰣇</span>",
+        "on-click": "rofi -show drun",
+        "on-click-right": "~/.config/rofi/power-menu/power-menu.sh"
+    },
     "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
